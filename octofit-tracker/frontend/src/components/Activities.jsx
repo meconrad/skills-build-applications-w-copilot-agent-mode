@@ -13,7 +13,7 @@ export default function Activities() {
       .catch((err) => setError(err.message));
   }, []);
 
-  const endpoint = apiEndpoint('activities');
+  const endpoint = '/api/activities/';
 
   return (
     <div className="container py-5">

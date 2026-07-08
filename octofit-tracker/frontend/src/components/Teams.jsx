@@ -13,7 +13,7 @@ export default function Teams() {
       .catch((err) => setError(err.message));
   }, []);
 
-  const endpoint = apiEndpoint('teams');
+  const endpoint = '/api/teams/';
 
   return (
     <div className="container py-5">

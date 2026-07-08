@@ -13,7 +13,7 @@ export default function Workouts() {
       .catch((err) => setError(err.message));
   }, []);
 
-  const endpoint = apiEndpoint('workouts');
+  const endpoint = '/api/workouts/';
 
   return (
     <div className="container py-5">

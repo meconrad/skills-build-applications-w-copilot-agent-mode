@@ -13,7 +13,7 @@ export default function Leaderboard() {
       .catch((err) => setError(err.message));
   }, []);
 
-  const endpoint = apiEndpoint('leaderboard');
+  const endpoint = '/api/leaderboard/';
 
   return (
     <div className="container py-5">

@@ -13,7 +13,7 @@ export default function Users() {
       .catch((err) => setError(err.message));
   }, []);
 
-  const endpoint = apiEndpoint('users');
+  const endpoint = '/api/users/';
 
   return (
     <div className="container py-5">
