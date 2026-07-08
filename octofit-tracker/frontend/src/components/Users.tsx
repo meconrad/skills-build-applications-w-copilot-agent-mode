@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchJson } from '../lib/api';
+import { apiEndpoint, fetchJson } from '../lib/api';
 
 interface User {
   _id: string;
@@ -28,11 +28,13 @@ export default function Users() {
       .catch((err) => setError(err.message));
   }, []);
 
+  const endpoint = apiEndpoint('users');
+
   return (
     <div className="container py-5">
       <h2>Users</h2>
       {error && <div className="alert alert-danger">{error}</div>}
-      <p>API endpoint: <code>{`/api/users/`}</code></p>
+      <p>API endpoint: <code>{endpoint}</code></p>
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchJson } from '../lib/api';
+import { apiEndpoint, fetchJson } from '../lib/api';
 
 interface Team {
   _id: string;
@@ -27,11 +27,13 @@ export default function Teams() {
       .catch((err) => setError(err.message));
   }, []);
 
+  const endpoint = apiEndpoint('teams');
+
   return (
     <div className="container py-5">
       <h2>Teams</h2>
       {error && <div className="alert alert-danger">{error}</div>}
-      <p>API endpoint: <code>{`/api/teams/`}</code></p>
+      <p>API endpoint: <code>{endpoint}</code></p>
       {teams.length === 0 ? (
         <p>No teams found.</p>
       ) : (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchJson } from '../lib/api';
+import { apiEndpoint, fetchJson } from '../lib/api';
 
 interface LeaderboardEntry {
   _id: string;
@@ -29,11 +29,13 @@ export default function Leaderboard() {
       .catch((err) => setError(err.message));
   }, []);
 
+  const endpoint = apiEndpoint('leaderboard');
+
   return (
     <div className="container py-5">
       <h2>Leaderboard</h2>
       {error && <div className="alert alert-danger">{error}</div>}
-      <p>API endpoint: <code>{`/api/leaderboard/`}</code></p>
+      <p>API endpoint: <code>{endpoint}</code></p>
       {entries.length === 0 ? (
         <p>No leaderboard entries found.</p>
       ) : (

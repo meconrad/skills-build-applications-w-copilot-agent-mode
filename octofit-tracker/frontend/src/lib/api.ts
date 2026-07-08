@@ -5,8 +5,12 @@ export const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-${port}.app.github.dev/api`
   : `http://localhost:${port}/api`;
 
+export function apiEndpoint(path: string) {
+  return `${apiBaseUrl}/${path}`;
+}
+
 export async function fetchJson<T>(path: string) {
-  const response = await fetch(`${apiBaseUrl}/${path}`);
+  const response = await fetch(apiEndpoint(path));
   if (!response.ok) {
     throw new Error(`API request failed: ${response.status} ${response.statusText}`);
   }
