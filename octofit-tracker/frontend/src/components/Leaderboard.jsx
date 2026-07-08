@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { apiEndpoint, fetchJson } from '../lib/api';
+import { fetchJson } from '../lib/api';
 
 export default function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const endpoint = codespaceName 
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard`
+    : `http://localhost:8000/api/leaderboard`;
 
   useEffect(() => {
     fetchJson('leaderboard')
@@ -12,8 +16,6 @@ export default function Leaderboard() {
       })
       .catch((err) => setError(err.message));
   }, []);
-
-  const endpoint = '/api/leaderboard/';
 
   return (
     <div className="container py-5">

@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { apiEndpoint, fetchJson } from '../lib/api';
+import { fetchJson } from '../lib/api';
 
 export default function Activities() {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState(null);
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const endpoint = codespaceName 
+    ? `https://${codespaceName}-8000.app.github.dev/api/activities`
+    : `http://localhost:8000/api/activities`;
 
   useEffect(() => {
     fetchJson('activities')
@@ -12,8 +16,6 @@ export default function Activities() {
       })
       .catch((err) => setError(err.message));
   }, []);
-
-  const endpoint = '/api/activities/';
 
   return (
     <div className="container py-5">

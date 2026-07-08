@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { apiEndpoint, fetchJson } from '../lib/api';
+import { fetchJson } from '../lib/api';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const endpoint = codespaceName 
+    ? `https://${codespaceName}-8000.app.github.dev/api/users`
+    : `http://localhost:8000/api/users`;
 
   useEffect(() => {
     fetchJson('users')
@@ -12,8 +16,6 @@ export default function Users() {
       })
       .catch((err) => setError(err.message));
   }, []);
-
-  const endpoint = '/api/users/';
 
   return (
     <div className="container py-5">
