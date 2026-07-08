@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { connectToDatabase } from './config/database.js';
 import usersRouter from './routes/users.js';
 import teamsRouter from './routes/teams.js';
@@ -11,6 +12,21 @@ const defaultPort = 8000;
 const port = process.env.PORT ? Number(process.env.PORT) : defaultPort;
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 const codespaceName = process.env.CODESPACE_NAME;
+
+// Configure CORS to allow requests from both localhost and Codespaces domains
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
+if (codespaceName) {
+  allowedOrigins.push(`https://${codespaceName}-5173.app.github.dev`);
+}
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use('/api/users', usersRouter);
