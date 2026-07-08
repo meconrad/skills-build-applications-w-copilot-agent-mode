@@ -19,10 +19,14 @@ app.use('/api/activities', activitiesRouter);
 app.use('/api/leaderboard', leaderboardRouter);
 app.use('/api/workouts', workoutsRouter);
 
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : `http://localhost:${port}`;
+
 app.get('/', (_req, res) => {
   res.json({
     message: 'OctoFit Tracker API is running',
-    apiBaseUrl: codespaceName ? `https://${codespaceName}-8000.githubpreview.dev` : `http://localhost:${port}`
+    apiBaseUrl
   });
 });
 
@@ -33,7 +37,7 @@ async function startServer() {
     console.log(`Server listening on http://localhost:${port}`);
     console.log(`MongoDB configured at ${mongoUrl}`);
     if (codespaceName) {
-      console.log(`Codespaces API URL: https://${codespaceName}-8000.githubpreview.dev`);
+      console.log(`Codespaces API URL: https://${codespaceName}-8000.app.github.dev`);
     }
   });
 }
